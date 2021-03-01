@@ -1,0 +1,14 @@
+#d72631 rouge
+#a2d5c6 bleu vert
+#077b8a	cyan foncé
+#5c3c92 violet
+
+
+#1e3d59 bleu foncé
+#f5f0e1 blanc
+#ff6e40 orange
+#ffc13b jaune
+
+#ecc19c beige
+#1e847f	cyan vert
+#000000 noire
