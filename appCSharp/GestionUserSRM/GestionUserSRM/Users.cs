@@ -9,7 +9,8 @@ namespace GestionUserSRM
     public class User
     {
         public string name { get; set; }
-        public int password { get; set; }
+        public string password { get; set; }
+        public bool banned { get; set; }
         public int idUser { get; set; }
         public int idRole { get; set; }
     }

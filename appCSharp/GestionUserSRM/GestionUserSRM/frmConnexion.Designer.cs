@@ -32,7 +32,6 @@
             this.btnConnexion = new System.Windows.Forms.Button();
             this.tbxUser = new System.Windows.Forms.TextBox();
             this.lblTitre = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.pbUser = new System.Windows.Forms.PictureBox();
             this.panelUser = new System.Windows.Forms.Panel();
             this.panelPassword = new System.Windows.Forms.Panel();
@@ -47,7 +46,6 @@
             // 
             this.btnConnexion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(123)))), ((int)(((byte)(138)))));
             this.btnConnexion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnConnexion.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnConnexion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(60)))), ((int)(((byte)(146)))));
             this.btnConnexion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -55,7 +53,7 @@
             this.btnConnexion.Location = new System.Drawing.Point(19, 250);
             this.btnConnexion.Name = "btnConnexion";
             this.btnConnexion.Size = new System.Drawing.Size(245, 38);
-            this.btnConnexion.TabIndex = 0;
+            this.btnConnexion.TabIndex = 1;
             this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = false;
             this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
@@ -68,7 +66,8 @@
             this.tbxUser.Location = new System.Drawing.Point(55, 130);
             this.tbxUser.Name = "tbxUser";
             this.tbxUser.Size = new System.Drawing.Size(214, 18);
-            this.tbxUser.TabIndex = 1;
+            this.tbxUser.TabIndex = 100;
+            this.tbxUser.TabStop = false;
             this.tbxUser.Text = "Name User";
             this.tbxUser.Click += new System.EventHandler(this.tbxUser_Click);
             // 
@@ -83,19 +82,6 @@
             this.lblTitre.TabIndex = 3;
             this.lblTitre.Text = "Super Rapide \r\nMessage";
             this.lblTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(266, -1);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(24, 24);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "X";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Click += new System.EventHandler(this.label1_Click);
             // 
             // pbUser
             // 
@@ -142,7 +128,8 @@
             this.tbxPassword.Location = new System.Drawing.Point(53, 184);
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.Size = new System.Drawing.Size(214, 18);
-            this.tbxPassword.TabIndex = 6;
+            this.tbxPassword.TabIndex = 600;
+            this.tbxPassword.TabStop = false;
             this.tbxPassword.Text = "Password";
             this.tbxPassword.Click += new System.EventHandler(this.tbxPassword_Click);
             // 
@@ -168,7 +155,6 @@
             this.Controls.Add(this.panelUser);
             this.Controls.Add(this.tbxPassword);
             this.Controls.Add(this.pbUser);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblTitre);
             this.Controls.Add(this.tbxUser);
             this.Controls.Add(this.btnConnexion);
@@ -191,7 +177,6 @@
         private System.Windows.Forms.Button btnConnexion;
         private System.Windows.Forms.TextBox tbxUser;
         private System.Windows.Forms.Label lblTitre;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pbUser;
         private System.Windows.Forms.Panel panelUser;
         private System.Windows.Forms.Panel panelPassword;

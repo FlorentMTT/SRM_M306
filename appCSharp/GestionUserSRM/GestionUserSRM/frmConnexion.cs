@@ -21,6 +21,8 @@ namespace GestionUserSRM
         string _user;
         string _password;
         string _errorMsg;
+        bool _closefrm;
+
 
         #endregion
 
@@ -38,11 +40,22 @@ namespace GestionUserSRM
             }
             set
             {
-                _password = HashWithSHA256(value);
+                _password = value;
             }
         }
 
+
+        // Getter et Setter pour accéder au contenu
+        // du textbox depuis l'extérieur
+        public string Edition
+        {
+            get { return tbxUser.Text; }
+            set { tbxUser.Text = value; }
+
+        }
+
         public string ErrorMsg { get => _errorMsg; set => _errorMsg = value; }
+        public bool Closefrm { get => _closefrm; set => _closefrm = value; }
 
         #endregion
 
@@ -67,10 +80,6 @@ namespace GestionUserSRM
             refreshInputText();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
 
         private void tbxUser_Click(object sender, EventArgs e)
         {
@@ -133,10 +142,18 @@ namespace GestionUserSRM
 
         public void ValidateEntre()
         {
-            if (Db.Select()[1].Contains(User) && Password == Db.lireUtilisateur(User).password.ToString())
+            if (Db.Select()[1].Contains(User) && Password == Db.lireUtilisateur(User).password)
             {
-                lblError.Text = "successful connection";
-                this.DialogResult = DialogResult.OK;
+                if (Db.lireUtilisateur(tbxUser.Text).idRole == 1)
+                {
+                    //  lblError.Text = "successful connection";
+                    this.DialogResult = DialogResult.OK;
+                }
+                else {
+                    lblError.Text = "Vous n'etes pas admin !";
+
+                }
+             
             }
             else
             {
@@ -148,6 +165,6 @@ namespace GestionUserSRM
 
         #endregion
 
-        
+
     }
 }

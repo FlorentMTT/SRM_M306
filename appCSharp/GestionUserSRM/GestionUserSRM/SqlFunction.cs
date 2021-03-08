@@ -25,8 +25,8 @@ namespace GestionUserSRM
         //Initialize values
         private void Initialize()
         {
-            server = "127.0.0.1";
-            database = "articles    ";
+            server = "localhost";
+            database = "articles";
             uid = "root";	//Renseigner
             password = "";	//Renseigner
             string connectionString;
@@ -125,11 +125,100 @@ namespace GestionUserSRM
             }
         }
 
+        public List<string>[] SelectMessage()
+        {
+            string query = "SELECT * FROM message";
+
+            //Create a list to store the result
+            List<string>[] list = new List<string>[2];
+            list[0] = new List<string>();
+            list[1] = new List<string>();
+
+
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list[0].Add(dataReader["idMessage"] + "");
+                    list[1].Add(dataReader["message"] + "");
+                }
+
+                //close Data Reader
+                dataReader.Close();
+
+                //close Connection
+                this.CloseConnection();
+
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
+
 
         public void UpdateRole(string name, int role)
         {
 
             string query = "UPDATE user SET idRole='" + role + "' WHERE name='" + name + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+
+        public void UpdateMessage(string message, int idMessage)
+        {
+
+            string query = "UPDATE message SET message='" + message + "' WHERE idMessage='" + idMessage + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+
+        public void UpdateUserBanne(int banned, int idUser)
+        {
+
+            string query = "UPDATE user SET banned='" + banned + "' WHERE idUser='" + idUser + "'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -188,7 +277,7 @@ namespace GestionUserSRM
 
         public User lireUtilisateur(string aLire)
         {
-            string query = "SELECT idUser, name, idrole FROM user where name = @name";
+            string query = "SELECT idUser, name, password, banned, idrole FROM user where name = @name";
             User user = null;
 
             if (this.OpenConnection() == true)
@@ -203,7 +292,7 @@ namespace GestionUserSRM
                 while (dataReader.Read())
                 {
                     // initialisation des propriétés de la classe avec les données de la db
-                    user = new User { name = dataReader.GetString("name"), idUser = dataReader.GetInt32("idUser"), idRole = dataReader.GetInt32("idrole") };
+                    user = new User { name = dataReader.GetString("name"), idUser = dataReader.GetInt32("idUser"), password = dataReader.GetString("password"), banned = dataReader.GetBoolean("banned"), idRole = dataReader.GetInt32("idrole") };
                 }
 
                 //close connection
