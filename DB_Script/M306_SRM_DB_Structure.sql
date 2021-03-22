@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 08 mars 2021 à 15:45
+-- Généré le :  lun. 22 mars 2021 à 13:29
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -25,28 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `admin`
+-- Structure de la table `admins`
 --
--- Création :  lun. 08 mars 2021 à 14:39
--- Dernière modification :  lun. 08 mars 2021 à 14:40
+-- Création :  mer. 10 mars 2021 à 09:14
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE `admin` (
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `login` varchar(30) NOT NULL,
   `password` varchar(64) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `admin`:
+-- RELATIONS POUR LA TABLE `admins`:
 --
 
 --
--- Déchargement des données de la table `admin`
+-- Déchargement des données de la table `admins`
 --
 
-INSERT INTO `admin` (`id`, `login`, `password`) VALUES
+INSERT INTO `admins` (`id`, `login`, `password`) VALUES
 (1, 'Admin_SRM', '8185c8ac4656219f4aa5541915079f7b3743e1b5f48bacfcc3386af016b55320');
 
 -- --------------------------------------------------------
@@ -77,14 +76,14 @@ CREATE TABLE `channels` (
 --
 -- Structure de la table `groups`
 --
--- Création :  lun. 08 mars 2021 à 14:38
+-- Création :  mer. 10 mars 2021 à 09:13
 --
 
 DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `profilPicture` varchar(100) NOT NULL,
+  `profilPictureURL` varchar(100) NOT NULL,
   `ownerUserID` int(11) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -98,21 +97,21 @@ CREATE TABLE `groups` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `media`
+-- Structure de la table `medias`
 --
--- Création :  lun. 08 mars 2021 à 13:53
+-- Création :  mer. 10 mars 2021 à 09:14
 --
 
-DROP TABLE IF EXISTS `media`;
-CREATE TABLE `media` (
+DROP TABLE IF EXISTS `medias`;
+CREATE TABLE `medias` (
   `id` int(11) NOT NULL,
   `messageID` int(11) NOT NULL,
   `url` varchar(100) NOT NULL,
   `typeMediaID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `media`:
+-- RELATIONS POUR LA TABLE `medias`:
 --   `typeMediaID`
 --       `typesmedias` -> `id`
 --   `messageID`
@@ -157,7 +156,6 @@ CREATE TABLE `messages` (
 -- Structure de la table `permissions`
 --
 -- Création :  lun. 08 mars 2021 à 13:55
--- Dernière modification :  lun. 08 mars 2021 à 14:06
 --
 
 DROP TABLE IF EXISTS `permissions`;
@@ -196,23 +194,20 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `typePermissionID`) VALU
 -- --------------------------------------------------------
 
 --
--- Structure de la table `relationgroupschannelsrolespermissions`
+-- Structure de la table `relationschannelsrolespermissions`
 --
--- Création :  lun. 08 mars 2021 à 13:56
+-- Création :  mer. 10 mars 2021 à 09:17
 --
 
-DROP TABLE IF EXISTS `relationgroupschannelsrolespermissions`;
-CREATE TABLE `relationgroupschannelsrolespermissions` (
-  `groupID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `relationschannelsrolespermissions`;
+CREATE TABLE `relationschannelsrolespermissions` (
   `channelID` int(11) NOT NULL,
   `roleID` int(11) NOT NULL,
   `permissionID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `relationgroupschannelsrolespermissions`:
---   `groupID`
---       `groups` -> `id`
+-- RELATIONS POUR LA TABLE `relationschannelsrolespermissions`:
 --   `permissionID`
 --       `permissions` -> `id`
 --   `channelID`
@@ -224,22 +219,43 @@ CREATE TABLE `relationgroupschannelsrolespermissions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `relationgroupsrolespermissions`
+-- Structure de la table `relationsgroupsusers`
 --
--- Création :  lun. 08 mars 2021 à 13:56
+-- Création :  mer. 10 mars 2021 à 09:17
 --
 
-DROP TABLE IF EXISTS `relationgroupsrolespermissions`;
-CREATE TABLE `relationgroupsrolespermissions` (
+DROP TABLE IF EXISTS `relationsgroupsusers`;
+CREATE TABLE `relationsgroupsusers` (
   `groupID` int(11) NOT NULL,
-  `roleID` int(11) NOT NULL,
-  `permissionID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `userID` int(11) NOT NULL,
+  `aka` varchar(30) DEFAULT NULL,
+  `ban` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `relationgroupsrolespermissions`:
+-- RELATIONS POUR LA TABLE `relationsgroupsusers`:
 --   `groupID`
 --       `groups` -> `id`
+--   `userID`
+--       `users` -> `id`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `relationsrolespermissions`
+--
+-- Création :  mer. 10 mars 2021 à 09:27
+--
+
+DROP TABLE IF EXISTS `relationsrolespermissions`;
+CREATE TABLE `relationsrolespermissions` (
+  `roleID` int(11) NOT NULL,
+  `permissionID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+
+--
+-- RELATIONS POUR LA TABLE `relationsrolespermissions`:
 --   `permissionID`
 --       `permissions` -> `id`
 --   `roleID`
@@ -249,22 +265,19 @@ CREATE TABLE `relationgroupsrolespermissions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `relationgroupsrolesusers`
+-- Structure de la table `relationsrolesusers`
 --
--- Création :  lun. 08 mars 2021 à 13:56
+-- Création :  mer. 10 mars 2021 à 09:23
 --
 
-DROP TABLE IF EXISTS `relationgroupsrolesusers`;
-CREATE TABLE `relationgroupsrolesusers` (
-  `groupID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `relationsrolesusers`;
+CREATE TABLE `relationsrolesusers` (
   `roleID` int(11) NOT NULL,
   `userID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `relationgroupsrolesusers`:
---   `groupID`
---       `groups` -> `id`
+-- RELATIONS POUR LA TABLE `relationsrolesusers`:
 --   `userID`
 --       `users` -> `id`
 --   `roleID`
@@ -274,46 +287,22 @@ CREATE TABLE `relationgroupsrolesusers` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `relationgroupsusers`
+-- Structure de la table `reports`
 --
--- Création :  lun. 08 mars 2021 à 13:57
---
-
-DROP TABLE IF EXISTS `relationgroupsusers`;
-CREATE TABLE `relationgroupsusers` (
-  `groupID` int(11) NOT NULL,
-  `userID` int(11) NOT NULL,
-  `aka` varchar(30) DEFAULT NULL,
-  `ban` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELATIONS POUR LA TABLE `relationgroupsusers`:
---   `groupID`
---       `groups` -> `id`
---   `userID`
---       `users` -> `id`
+-- Création :  mer. 10 mars 2021 à 09:14
 --
 
--- --------------------------------------------------------
-
---
--- Structure de la table `report`
---
--- Création :  lun. 08 mars 2021 à 14:38
---
-
-DROP TABLE IF EXISTS `report`;
-CREATE TABLE `report` (
+DROP TABLE IF EXISTS `reports`;
+CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `typeReportID` int(11) NOT NULL,
   `description` varchar(300) NOT NULL,
   `authorUserID` int(11) NOT NULL,
   `targetedMessageID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
--- RELATIONS POUR LA TABLE `report`:
+-- RELATIONS POUR LA TABLE `reports`:
 --   `typeReportID`
 --       `typesreports` -> `id`
 --   `targetedMessageID`
@@ -352,7 +341,6 @@ CREATE TABLE `roles` (
 -- Structure de la table `typesmedias`
 --
 -- Création :  lun. 08 mars 2021 à 13:40
--- Dernière modification :  lun. 08 mars 2021 à 13:40
 --
 
 DROP TABLE IF EXISTS `typesmedias`;
@@ -387,7 +375,6 @@ INSERT INTO `typesmedias` (`id`, `name`) VALUES
 -- Structure de la table `typespermissions`
 --
 -- Création :  lun. 08 mars 2021 à 13:40
--- Dernière modification :  lun. 08 mars 2021 à 13:40
 --
 
 DROP TABLE IF EXISTS `typespermissions`;
@@ -416,7 +403,6 @@ INSERT INTO `typespermissions` (`id`, `name`) VALUES
 -- Structure de la table `typesreports`
 --
 -- Création :  lun. 08 mars 2021 à 13:40
--- Dernière modification :  lun. 08 mars 2021 à 13:40
 --
 
 DROP TABLE IF EXISTS `typesreports`;
@@ -443,7 +429,7 @@ INSERT INTO `typesreports` (`id`, `name`) VALUES
 --
 -- Structure de la table `users`
 --
--- Création :  lun. 08 mars 2021 à 13:59
+-- Création :  mer. 10 mars 2021 à 09:13
 --
 
 DROP TABLE IF EXISTS `users`;
@@ -452,7 +438,7 @@ CREATE TABLE `users` (
   `email` varchar(100) NOT NULL,
   `password` varchar(64) NOT NULL,
   `name` varchar(30) NOT NULL,
-  `profilPicture` varchar(100) NOT NULL,
+  `profilPictureURL` varchar(100) NOT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -465,9 +451,9 @@ CREATE TABLE `users` (
 --
 
 --
--- Index pour la table `admin`
+-- Index pour la table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -485,9 +471,9 @@ ALTER TABLE `groups`
   ADD KEY `ownerID` (`ownerUserID`);
 
 --
--- Index pour la table `media`
+-- Index pour la table `medias`
 --
-ALTER TABLE `media`
+ALTER TABLE `medias`
   ADD PRIMARY KEY (`id`),
   ADD KEY `messageID` (`messageID`),
   ADD KEY `typeMediaID` (`typeMediaID`);
@@ -510,45 +496,42 @@ ALTER TABLE `permissions`
   ADD KEY `typePermissionID` (`typePermissionID`);
 
 --
--- Index pour la table `relationgroupschannelsrolespermissions`
+-- Index pour la table `relationschannelsrolespermissions`
 --
-ALTER TABLE `relationgroupschannelsrolespermissions`
-  ADD PRIMARY KEY (`groupID`,`channelID`,`roleID`,`permissionID`),
-  ADD KEY `groupID` (`groupID`),
+ALTER TABLE `relationschannelsrolespermissions`
+  ADD PRIMARY KEY (`channelID`,`roleID`,`permissionID`) USING BTREE,
   ADD KEY `channelID` (`channelID`),
   ADD KEY `roleID` (`roleID`),
   ADD KEY `permissionID` (`permissionID`);
 
 --
--- Index pour la table `relationgroupsrolespermissions`
+-- Index pour la table `relationsgroupsusers`
 --
-ALTER TABLE `relationgroupsrolespermissions`
-  ADD PRIMARY KEY (`groupID`,`roleID`,`permissionID`),
-  ADD KEY `groupID` (`groupID`),
-  ADD KEY `roleID` (`roleID`),
-  ADD KEY `permissionID` (`permissionID`);
-
---
--- Index pour la table `relationgroupsrolesusers`
---
-ALTER TABLE `relationgroupsrolesusers`
-  ADD PRIMARY KEY (`groupID`,`roleID`,`userID`),
-  ADD KEY `groupID` (`groupID`),
-  ADD KEY `roleID` (`roleID`),
-  ADD KEY `userID` (`userID`);
-
---
--- Index pour la table `relationgroupsusers`
---
-ALTER TABLE `relationgroupsusers`
+ALTER TABLE `relationsgroupsusers`
   ADD PRIMARY KEY (`groupID`,`userID`),
   ADD KEY `groupID` (`groupID`),
   ADD KEY `userID` (`userID`);
 
 --
--- Index pour la table `report`
+-- Index pour la table `relationsrolespermissions`
 --
-ALTER TABLE `report`
+ALTER TABLE `relationsrolespermissions`
+  ADD PRIMARY KEY (`roleID`,`permissionID`) USING BTREE,
+  ADD KEY `roleID` (`roleID`),
+  ADD KEY `permissionID` (`permissionID`);
+
+--
+-- Index pour la table `relationsrolesusers`
+--
+ALTER TABLE `relationsrolesusers`
+  ADD PRIMARY KEY (`roleID`,`userID`) USING BTREE,
+  ADD KEY `roleID` (`roleID`),
+  ADD KEY `userID` (`userID`);
+
+--
+-- Index pour la table `reports`
+--
+ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `authorID_targetedMessageID` (`authorUserID`,`targetedMessageID`) USING BTREE,
   ADD KEY `typeReportID` (`typeReportID`),
@@ -591,24 +574,24 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pour la table `admin`
+-- AUTO_INCREMENT pour la table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `channels`
 --
 ALTER TABLE `channels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT pour la table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
--- AUTO_INCREMENT pour la table `media`
+-- AUTO_INCREMENT pour la table `medias`
 --
-ALTER TABLE `media`
+ALTER TABLE `medias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `messages`
@@ -621,15 +604,15 @@ ALTER TABLE `messages`
 ALTER TABLE `permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
--- AUTO_INCREMENT pour la table `report`
+-- AUTO_INCREMENT pour la table `reports`
 --
-ALTER TABLE `report`
+ALTER TABLE `reports`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT pour la table `typesmedias`
 --
@@ -649,7 +632,7 @@ ALTER TABLE `typesreports`
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Contraintes pour les tables déchargées
 --
@@ -667,11 +650,11 @@ ALTER TABLE `groups`
   ADD CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`ownerUserID`) REFERENCES `users` (`id`) ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `media`
+-- Contraintes pour la table `medias`
 --
-ALTER TABLE `media`
-  ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`typeMediaID`) REFERENCES `typesmedias` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `media_ibfk_2` FOREIGN KEY (`messageID`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `medias`
+  ADD CONSTRAINT `medias_ibfk_1` FOREIGN KEY (`typeMediaID`) REFERENCES `typesmedias` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `medias_ibfk_2` FOREIGN KEY (`messageID`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `messages`
@@ -689,44 +672,41 @@ ALTER TABLE `permissions`
   ADD CONSTRAINT `permissions_ibfk_1` FOREIGN KEY (`typePermissionID`) REFERENCES `typespermissions` (`id`) ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `relationgroupschannelsrolespermissions`
+-- Contraintes pour la table `relationschannelsrolespermissions`
 --
-ALTER TABLE `relationgroupschannelsrolespermissions`
-  ADD CONSTRAINT `relationgroupschannelsrolespermissions_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupschannelsrolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupschannelsrolespermissions_ibfk_3` FOREIGN KEY (`channelID`) REFERENCES `channels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupschannelsrolespermissions_ibfk_4` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `relationschannelsrolespermissions`
+  ADD CONSTRAINT `relationschannelsrolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relationschannelsrolespermissions_ibfk_3` FOREIGN KEY (`channelID`) REFERENCES `channels` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relationschannelsrolespermissions_ibfk_4` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `relationgroupsrolespermissions`
+-- Contraintes pour la table `relationsgroupsusers`
 --
-ALTER TABLE `relationgroupsrolespermissions`
-  ADD CONSTRAINT `relationgroupsrolespermissions_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupsrolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupsrolespermissions_ibfk_3` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `relationsgroupsusers`
+  ADD CONSTRAINT `relationsgroupsusers_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relationsgroupsusers_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `relationgroupsrolesusers`
+-- Contraintes pour la table `relationsrolespermissions`
 --
-ALTER TABLE `relationgroupsrolesusers`
-  ADD CONSTRAINT `relationgroupsrolesusers_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupsrolesusers_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupsrolesusers_ibfk_3` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `relationsrolespermissions`
+  ADD CONSTRAINT `relationsrolespermissions_ibfk_2` FOREIGN KEY (`permissionID`) REFERENCES `permissions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relationsrolespermissions_ibfk_3` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `relationgroupsusers`
+-- Contraintes pour la table `relationsrolesusers`
 --
-ALTER TABLE `relationgroupsusers`
-  ADD CONSTRAINT `relationgroupsusers_ibfk_1` FOREIGN KEY (`groupID`) REFERENCES `groups` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `relationgroupsusers_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `relationsrolesusers`
+  ADD CONSTRAINT `relationsrolesusers_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `relationsrolesusers_ibfk_3` FOREIGN KEY (`roleID`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `report`
+-- Contraintes pour la table `reports`
 --
-ALTER TABLE `report`
-  ADD CONSTRAINT `report_ibfk_1` FOREIGN KEY (`typeReportID`) REFERENCES `typesreports` (`id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `report_ibfk_2` FOREIGN KEY (`targetedMessageID`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `report_ibfk_3` FOREIGN KEY (`authorUserID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `reports`
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`typeReportID`) REFERENCES `typesreports` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`targetedMessageID`) REFERENCES `messages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`authorUserID`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `roles`
