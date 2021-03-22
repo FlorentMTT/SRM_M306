@@ -92,5 +92,5 @@ function checkUserByEmailPassword($email, $password)
     if (!empty($requete[0])) {
         return [true, $requete[0]['id']];
     }
-    return [true, null];
+    return [false, null];
 }

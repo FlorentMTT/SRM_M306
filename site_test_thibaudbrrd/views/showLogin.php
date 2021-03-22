@@ -14,12 +14,12 @@ $errorMsg = "";
 $email = "";
 if (filter_has_var(INPUT_POST,'submit')) {
 
-    // récupération des données provenant des données saisies par l'utilisateur
+    // récupération des données provenant de la saisie par l'utilisateur
     $email = filter_input(INPUT_POST,'email', FILTER_SANITIZE_STRING);
     $password = filter_input(INPUT_POST,'password', FILTER_SANITIZE_STRING);
 
     $response = checkUserByEmailPassword($email, hash("sha256", "$password"));
-    var_dump($response);
+    $_SESSION['info_client']['date_last_action'] = date("Y-m-d H:i:s");
     if ($response[0]) {
         $_SESSION['info_client']['user'] = $response[1];
         header("location:index.php");
@@ -30,20 +30,35 @@ if (filter_has_var(INPUT_POST,'submit')) {
     }
 }
 
-// $form = formHeader("login.php", "POST", "form-horizontal");
-// if ($errorMsg != "") {
-//    $form .= "<div class=\"alert error\">";
-//    $form .= "<span class=\"closebtn\" onclick=\"this.parentElement.style.display='none';\">&times;</span>";
-//    $form .= $errorMsg;
-//    $form .= "</div>";
-//}
-//$form .= formInput("email", "Email", $email, "email");
-//$form .= formInput("password", "Password", "", "password");
-//$form .= formFooter("Se connecter");
-
 include "header.php";
 ?>
 
-<!-- <?= $form ?> -->
+<form action="login.php" method="POST" class="form-horizontal">
+    <?php if ($errorMsg != "") { ?>
+    <div class="alert error">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <?= $errorMsg ?>
+    </div>
+    <?php } ?>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="email">Email : </label>
+        <div class="col-sm-9">
+            <input class="form-control" type="email" name="email" id="email" value="<?= $email ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-3" for="password">Password : </label>
+        <div class="col-sm-9">
+            <input class="form-control" type="password" name="password" id="password" value="">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-12">
+            <input type="submit" name="submit" value="Se connecter"/>
+        </div>
+    </div>
+</form>
 
 <?php include "footer.php" ?>

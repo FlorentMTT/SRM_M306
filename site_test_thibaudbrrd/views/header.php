@@ -5,6 +5,7 @@
 // Auteur: Favre Steven
 // Version 1.0.0 PC 22.02.2021, version initial
 
+include_once('views/initialize.php');
 
 if (empty($pageTitle)){
     $pageTitle = "sans titre";
@@ -21,7 +22,9 @@ if (empty($pageTitle)){
         <link rel="stylesheet" href="css/style.css">
         
     </head>
-    <body>
+    <body onload="callGroups()">
+        <?= var_dump($_SESSION['info_client']) ?>
+        <input type="hidden" id="hidden_user_id" value="<?= $_SESSION['info_client']['user'] ?>">
         <div class="container">
             <header>
                 <h1 class="card-title">M306_SRM</h1>
