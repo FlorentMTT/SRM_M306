@@ -44,16 +44,16 @@
             // 
             // btnConnexion
             // 
-            this.btnConnexion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(7)))), ((int)(((byte)(123)))), ((int)(((byte)(138)))));
+            this.btnConnexion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(26)))), ((int)(((byte)(41)))));
             this.btnConnexion.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnConnexion.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(60)))), ((int)(((byte)(146)))));
             this.btnConnexion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnConnexion.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnexion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(60)))), ((int)(((byte)(146)))));
+            this.btnConnexion.ForeColor = System.Drawing.Color.White;
             this.btnConnexion.Location = new System.Drawing.Point(19, 250);
             this.btnConnexion.Name = "btnConnexion";
             this.btnConnexion.Size = new System.Drawing.Size(245, 38);
-            this.btnConnexion.TabIndex = 1;
+            this.btnConnexion.TabIndex = 6;
             this.btnConnexion.Text = "Connexion";
             this.btnConnexion.UseVisualStyleBackColor = false;
             this.btnConnexion.Click += new System.EventHandler(this.btnConnexion_Click);
@@ -66,7 +66,7 @@
             this.tbxUser.Location = new System.Drawing.Point(55, 130);
             this.tbxUser.Name = "tbxUser";
             this.tbxUser.Size = new System.Drawing.Size(214, 18);
-            this.tbxUser.TabIndex = 100;
+            this.tbxUser.TabIndex = 1;
             this.tbxUser.TabStop = false;
             this.tbxUser.Text = "Name User";
             this.tbxUser.Click += new System.EventHandler(this.tbxUser_Click);
@@ -79,12 +79,13 @@
             this.lblTitre.Location = new System.Drawing.Point(12, 9);
             this.lblTitre.Name = "lblTitre";
             this.lblTitre.Size = new System.Drawing.Size(270, 84);
-            this.lblTitre.TabIndex = 3;
+            this.lblTitre.TabIndex = 0;
             this.lblTitre.Text = "Super Rapide \r\nMessage";
             this.lblTitre.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // pbUser
             // 
+            this.pbUser.BackColor = System.Drawing.Color.White;
             this.pbUser.BackgroundImage = global::GestionUserSRM.Properties.Resources.userCyanFoncé;
             this.pbUser.Location = new System.Drawing.Point(23, 127);
             this.pbUser.Name = "pbUser";
@@ -99,7 +100,7 @@
             this.panelUser.Name = "panelUser";
             this.panelUser.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panelUser.Size = new System.Drawing.Size(219, 1);
-            this.panelUser.TabIndex = 5;
+            this.panelUser.TabIndex = 2;
             // 
             // panelPassword
             // 
@@ -109,10 +110,11 @@
             this.panelPassword.Name = "panelPassword";
             this.panelPassword.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.panelPassword.Size = new System.Drawing.Size(218, 1);
-            this.panelPassword.TabIndex = 8;
+            this.panelPassword.TabIndex = 4;
             // 
             // pbPassword
             // 
+            this.pbPassword.BackColor = System.Drawing.Color.White;
             this.pbPassword.BackgroundImage = global::GestionUserSRM.Properties.Resources.passwordCyanFonce;
             this.pbPassword.Location = new System.Drawing.Point(22, 181);
             this.pbPassword.Name = "pbPassword";
@@ -128,7 +130,7 @@
             this.tbxPassword.Location = new System.Drawing.Point(53, 184);
             this.tbxPassword.Name = "tbxPassword";
             this.tbxPassword.Size = new System.Drawing.Size(214, 18);
-            this.tbxPassword.TabIndex = 600;
+            this.tbxPassword.TabIndex = 3;
             this.tbxPassword.TabStop = false;
             this.tbxPassword.Text = "Password";
             this.tbxPassword.Click += new System.EventHandler(this.tbxPassword_Click);
@@ -140,14 +142,14 @@
             this.lblError.Location = new System.Drawing.Point(96, 221);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(72, 13);
-            this.lblError.TabIndex = 9;
+            this.lblError.TabIndex = 5;
             this.lblError.Text = "ErrorMessage";
             // 
             // frmConnexion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(162)))), ((int)(((byte)(213)))), ((int)(((byte)(198)))));
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(289, 300);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.panelPassword);

@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
 using System.Security.Cryptography;
 
 namespace GestionUserSRM
@@ -144,15 +143,17 @@ namespace GestionUserSRM
         {
             if (Db.Select()[1].Contains(User) && Password == Db.lireUtilisateur(User).password)
             {
-                if (Db.lireUtilisateur(tbxUser.Text).idRole == 1)
-                {
-                    //  lblError.Text = "successful connection";
-                    this.DialogResult = DialogResult.OK;
-                }
-                else {
-                    lblError.Text = "Vous n'etes pas admin !";
+                //if (Db.lireUtilisateur(tbxUser.Text).idRole == 1)
+                //{
+                //    //  lblError.Text = "successful connection";
+                //    this.DialogResult = DialogResult.OK;
+                //}
+                //else {
+                //    lblError.Text = "Vous n'etes pas admin !";
 
-                }
+                //}
+
+                this.DialogResult = DialogResult.OK;
              
             }
             else
@@ -163,8 +164,7 @@ namespace GestionUserSRM
         }
 
 
+
         #endregion
-
-
     }
 }

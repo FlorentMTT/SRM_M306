@@ -26,9 +26,9 @@ namespace GestionUserSRM
         private void Initialize()
         {
             server = "localhost";
-            database = "articles";
-            uid = "root";	//Renseigner
-            password = "";	//Renseigner
+            database = "m306_srm_db";
+            uid = "userApp";	//Renseigner
+            password = "M306";	//Renseigner
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
@@ -83,7 +83,7 @@ namespace GestionUserSRM
         //Select statement
         public List<string>[] Select()
         {
-            string query = "SELECT * FROM user";
+            string query = "SELECT * FROM users";
 
             //Create a list to store the result
             List<string>[] list = new List<string>[4];
@@ -104,10 +104,10 @@ namespace GestionUserSRM
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["idUser"] + "");
-                    list[1].Add(dataReader["name"] + "");
+                    list[0].Add(dataReader["id"] + "");
+                    list[1].Add(dataReader["email"] + "");
                     list[3].Add(dataReader["password"] + "");
-                    list[3].Add(dataReader["idRole"] + "");
+                    list[3].Add(dataReader["name"] + "");
                 }
 
                 //close Data Reader
@@ -125,52 +125,99 @@ namespace GestionUserSRM
             }
         }
 
-        public List<string>[] SelectMessage()
+        //public List<string>[] SelectMessage()
+        //{
+        //    string query = "SELECT * FROM messages";
+
+        //    //Create a list to store the result
+        //    List<string>[] list = new List<string>[2];
+        //    list[0] = new List<string>();
+        //    list[1] = new List<string>();
+
+
+
+        //    //Open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //Create Command
+        //        MySqlCommand cmd = new MySqlCommand(query, connection);
+        //        //Create a data reader and Execute the command
+        //        MySqlDataReader dataReader = cmd.ExecuteReader();
+
+        //        //Read the data and store them in the list
+        //        while (dataReader.Read())
+        //        {
+        //            list[0].Add(dataReader["id"] + "");
+        //            list[1].Add(dataReader["content"] + "");
+        //        }
+
+        //        //close Data Reader
+        //        dataReader.Close();
+
+        //        //close Connection
+        //        this.CloseConnection();
+
+        //        //return list to be displayed
+        //        return list;
+        //    }
+        //    else
+        //    {
+        //        return list;
+        //    }
+        //}
+
+        //public void UpdateRole(string name, int role)
+        //{
+
+        //    string query = "UPDATE users SET idRole='" + role + "' WHERE name='" + name + "'";
+
+        //    //Open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //create mysql command
+        //        MySqlCommand cmd = new MySqlCommand();
+        //        //Assign the query using CommandText
+        //        cmd.CommandText = query;
+        //        //Assign the connection using Connection
+        //        cmd.Connection = connection;
+
+        //        //Execute query
+        //        cmd.ExecuteNonQuery();
+
+        //        //close connection
+        //        this.CloseConnection();
+        //    }
+
+        //}
+        
+        //public void UpdateMessage(string message, int idMessage)
+        //{
+
+        //    string query = "UPDATE message SET message='" + message + "' WHERE idMessage='" + idMessage + "'";
+
+        //    //Open connection
+        //    if (this.OpenConnection() == true)
+        //    {
+        //        //create mysql command
+        //        MySqlCommand cmd = new MySqlCommand();
+        //        //Assign the query using CommandText
+        //        cmd.CommandText = query;
+        //        //Assign the connection using Connection
+        //        cmd.Connection = connection;
+
+        //        //Execute query
+        //        cmd.ExecuteNonQuery();
+
+        //        //close connection
+        //        this.CloseConnection();
+        //    }
+
+        //}
+
+        public void UpdateUserBanne(int active, int id)
         {
-            string query = "SELECT * FROM message";
 
-            //Create a list to store the result
-            List<string>[] list = new List<string>[2];
-            list[0] = new List<string>();
-            list[1] = new List<string>();
-
-
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
-                //Create a data reader and Execute the command
-                MySqlDataReader dataReader = cmd.ExecuteReader();
-
-                //Read the data and store them in the list
-                while (dataReader.Read())
-                {
-                    list[0].Add(dataReader["idMessage"] + "");
-                    list[1].Add(dataReader["message"] + "");
-                }
-
-                //close Data Reader
-                dataReader.Close();
-
-                //close Connection
-                this.CloseConnection();
-
-                //return list to be displayed
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-        }
-
-
-        public void UpdateRole(string name, int role)
-        {
-
-            string query = "UPDATE user SET idRole='" + role + "' WHERE name='" + name + "'";
+            string query = "UPDATE users SET active='" + active + "' WHERE id='" + id + "'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -191,57 +238,9 @@ namespace GestionUserSRM
 
         }
 
-        public void UpdateMessage(string message, int idMessage)
+        public void Insert(string email, int password)
         {
-
-            string query = "UPDATE message SET message='" + message + "' WHERE idMessage='" + idMessage + "'";
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = connection;
-
-                //Execute query
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-
-        }
-
-        public void UpdateUserBanne(int banned, int idUser)
-        {
-
-            string query = "UPDATE user SET banned='" + banned + "' WHERE idUser='" + idUser + "'";
-
-            //Open connection
-            if (this.OpenConnection() == true)
-            {
-                //create mysql command
-                MySqlCommand cmd = new MySqlCommand();
-                //Assign the query using CommandText
-                cmd.CommandText = query;
-                //Assign the connection using Connection
-                cmd.Connection = connection;
-
-                //Execute query
-                cmd.ExecuteNonQuery();
-
-                //close connection
-                this.CloseConnection();
-            }
-
-        }
-
-        public void Insert(string name, int password)
-        {
-            string query = "INSERT INTO user(name, password) VALUES('" + name + "', '" + password + "')";
+            string query = "INSERT INTO users(email, password) VALUES('" + email + "', '" + password + "')";
 
             //open connection
             if (this.OpenConnection() == true)
@@ -257,9 +256,9 @@ namespace GestionUserSRM
             }
         }
 
-        public void Delete(string name)
+        public void Delete(string email)
         {
-            string query = "DELETE FROM user WHERE name='" + name + "'";
+            string query = "DELETE FROM users WHERE email='" + email + "'";
 
             //open connection
             if (this.OpenConnection() == true)
@@ -277,14 +276,14 @@ namespace GestionUserSRM
 
         public User lireUtilisateur(string aLire)
         {
-            string query = "SELECT idUser, name, password, banned, idrole FROM user where name = @name";
+            string query = "SELECT id, email, password, active FROM user where email = @email";
             User user = null;
 
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@name", aLire);
+                cmd.Parameters.AddWithValue("@email", aLire);
 
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
@@ -292,7 +291,7 @@ namespace GestionUserSRM
                 while (dataReader.Read())
                 {
                     // initialisation des propriétés de la classe avec les données de la db
-                    user = new User { name = dataReader.GetString("name"), idUser = dataReader.GetInt32("idUser"), password = dataReader.GetString("password"), banned = dataReader.GetBoolean("banned"), idRole = dataReader.GetInt32("idrole") };
+                    user = new User { email = dataReader.GetString("email"), id = dataReader.GetInt32("id"), password = dataReader.GetString("password"), active = dataReader.GetBoolean("active") };
                 }
 
                 //close connection

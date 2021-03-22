@@ -45,7 +45,6 @@ namespace GestionUserSRM
             // valider par l'utilisateur
             if (retour == DialogResult.OK)
             {
-
                 this.lblUserCo.Text = "Vous etes connecter en tant que : " + dialogue.Edition;
             }
             else
@@ -62,40 +61,25 @@ namespace GestionUserSRM
             
         }
 
-        private void lbMessages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            gbMessage.Show();
-            lblMessageSelected.Text = "id message selectioné : " + lbMessages.SelectedIndex.ToString();
-            tbxMessageSelectioner.Text = lbMessages.SelectedValue.ToString();
-        }
-
-        private void btnUpdateMessage_Click(object sender, EventArgs e)
-        {
-            db.UpdateMessage(tbxMessageSelectioner.Text, lbMessages.SelectedIndex+1);
-            refreshList();
-        }
-
         private void btnBannUser_Click(object sender, EventArgs e)
         {
-            db.UpdateUserBanne(1, db.lireUtilisateur(lbUser.SelectedValue.ToString()).idUser);
+            db.UpdateUserBanne(1, db.lireUtilisateur(lbUser.SelectedValue.ToString()).id);
             afficheBtnBanned();
         }
 
         private void btnDeBannUser_Click(object sender, EventArgs e)
         {
-            db.UpdateUserBanne(0, db.lireUtilisateur(lbUser.SelectedValue.ToString()).idUser);
+            db.UpdateUserBanne(0, db.lireUtilisateur(lbUser.SelectedValue.ToString()).id);
             afficheBtnBanned();
         }
 
         public void refreshList()
         {
-            lbUser.DataSource = Db.Select()[1];
-            lbMessages.DataSource = Db.SelectMessage()[1];
-         
+            lbUser.DataSource = Db.Select()[1];         
         }
         public void afficheBtnBanned()
         {
-            if (db.lireUtilisateur(lbUser.SelectedValue.ToString()).banned)
+            if (db.lireUtilisateur(lbUser.SelectedValue.ToString()).active)
             {
                 btnBannUser.Enabled = false;
                 btnBannUser.BackColor = Color.FromArgb(30, 61, 89);

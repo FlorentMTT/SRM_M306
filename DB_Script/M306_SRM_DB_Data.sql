@@ -25,9 +25,10 @@ SET time_zone = "+00:00";
 --
 -- Déchargement des données de la table `admins`
 --
-
-INSERT INTO `admins` (`id`, `login`, `password`) VALUES
-(1, 'Admin_SRM', '8185c8ac4656219f4aa5541915079f7b3743e1b5f48bacfcc3386af016b55320');
+INSERT INTO `groups` (`id`, `name`, `profilPictureURL`, `ownerUserID`, `active`) VALUES
+(1, 'Forum Général', 'pp_forumgeneral_01.png', 1, 1),
+(2, 'Les G@m3rz', 'pp_lesg_m3rz_01.png', 10, 1),
+(3, 'Révision : cours CG', 'pp_revisioncourscg_01.png', 7, 1);
 
 --
 -- Déchargement des données de la table `channels`
@@ -47,10 +48,6 @@ INSERT INTO `channels` (`id`, `groupID`, `place`, `name`, `description`) VALUES
 -- Déchargement des données de la table `groups`
 --
 
-INSERT INTO `groups` (`id`, `name`, `profilPictureURL`, `ownerUserID`, `active`) VALUES
-(1, 'Forum Général', 'pp_forumgeneral_01.png', 1, 1),
-(2, 'Les G@m3rz', 'pp_lesg_m3rz_01.png', 10, 1),
-(3, 'Révision : cours CG', 'pp_revisioncourscg_01.png', 7, 1);
 
 --
 -- Déchargement des données de la table `relationsgroupsusers`

@@ -45,8 +45,6 @@ CREATE TABLE `admins` (
 -- Déchargement des données de la table `admins`
 --
 
-INSERT INTO `admins` (`id`, `login`, `password`) VALUES
-(1, 'Admin_SRM', '8185c8ac4656219f4aa5541915079f7b3743e1b5f48bacfcc3386af016b55320');
 
 -- --------------------------------------------------------
 

@@ -23,3 +23,15 @@ C:\Users\DariusGmsds\Desktop\Ecole_cle_usb\Troisième année\Deuxième semestre\
 C:\Users\DariusGmsds\Desktop\Ecole_cle_usb\Troisième année\Deuxième semestre\m306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.csproj.CopyComplete
 C:\Users\DariusGmsds\Desktop\Ecole_cle_usb\Troisième année\Deuxième semestre\m306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.exe
 C:\Users\DariusGmsds\Desktop\Ecole_cle_usb\Troisième année\Deuxième semestre\m306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.pdb
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\bin\Debug\GestionUserSRM.exe.config
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\bin\Debug\GestionUserSRM.exe
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\bin\Debug\GestionUserSRM.pdb
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.csprojAssemblyReference.cache
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.frmConnexion.resources
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.frmGestion.resources
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.Properties.Resources.resources
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.csproj.GenerateResource.cache
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.csproj.CoreCompileInputs.cache
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.csproj.CopyComplete
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.exe
+C:\Users\stevenfvr\Desktop\M306\SRM_M306\appCSharp\GestionUserSRM\GestionUserSRM\obj\Debug\GestionUserSRM.pdb

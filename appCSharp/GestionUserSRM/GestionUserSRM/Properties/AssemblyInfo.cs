@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // l'ensemble d'attributs suivant. Changez les valeurs de ces attributs pour modifier les informations
 // associées à un assembly.
 [assembly: AssemblyTitle("GestionUserSRM")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Projet M306")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("CFPT - Darius D., Thibaud B., Florent M., Steven F.")]
 [assembly: AssemblyProduct("GestionUserSRM")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
