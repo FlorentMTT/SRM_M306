@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 22 mars 2021 à 13:24
+-- Généré le :  lun. 22 mars 2021 à 15:58
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -25,10 +25,9 @@ SET time_zone = "+00:00";
 --
 -- Déchargement des données de la table `admins`
 --
-INSERT INTO `groups` (`id`, `name`, `profilPictureURL`, `ownerUserID`, `active`) VALUES
-(1, 'Forum Général', 'pp_forumgeneral_01.png', 1, 1),
-(2, 'Les G@m3rz', 'pp_lesg_m3rz_01.png', 10, 1),
-(3, 'Révision : cours CG', 'pp_revisioncourscg_01.png', 7, 1);
+
+INSERT INTO `admins` (`id`, `login`, `password`) VALUES
+(1, 'Admin_SRM', '8185c8ac4656219f4aa5541915079f7b3743e1b5f48bacfcc3386af016b55320');
 
 --
 -- Déchargement des données de la table `channels`
@@ -48,6 +47,19 @@ INSERT INTO `channels` (`id`, `groupID`, `place`, `name`, `description`) VALUES
 -- Déchargement des données de la table `groups`
 --
 
+INSERT INTO `groups` (`id`, `name`, `profilPictureURL`, `ownerUserID`, `active`) VALUES
+(1, 'Forum Général', 'pp_forumgeneral_01.png', 1, 1),
+(2, 'Les G@m3rz', 'pp_lesg_m3rz_01.png', 10, 1),
+(3, 'Révision : cours CG', 'pp_revisioncourscg_01.png', 7, 1);
+
+--
+-- Déchargement des données de la table `messages`
+--
+
+INSERT INTO `messages` (`id`, `date`, `content`, `senderUserID`, `receiverUserID`, `receiverGroupID`, `receiverChannelID`, `active`) VALUES
+(1, '2021-03-22 14:00:00', 'Salut Alain, c\'est Alex !', 3, 2, NULL, NULL, 1),
+(3, '2021-03-22 14:07:14', 'Vous avez l\'exercice de Math pour vendredi ?', 5, NULL, 3, 5, 1),
+(4, '2021-03-22 14:07:51', 'Non désoler', 10, NULL, 3, 5, 1);
 
 --
 -- Déchargement des données de la table `relationsgroupsusers`
@@ -91,7 +103,9 @@ INSERT INTO `relationsrolesusers` (`roleID`, `userID`) VALUES
 (5, 9),
 (6, 10),
 (7, 2),
-(7, 3);
+(7, 3),
+(7, 10),
+(9, 10);
 
 --
 -- Déchargement des données de la table `roles`

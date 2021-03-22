@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  lun. 22 mars 2021 à 13:29
+-- Généré le :  lun. 22 mars 2021 à 15:58
 -- Version du serveur :  5.7.17
 -- Version de PHP :  7.1.3
 
@@ -40,11 +40,6 @@ CREATE TABLE `admins` (
 --
 -- RELATIONS POUR LA TABLE `admins`:
 --
-
---
--- Déchargement des données de la table `admins`
---
-
 
 -- --------------------------------------------------------
 
@@ -121,18 +116,19 @@ CREATE TABLE `medias` (
 --
 -- Structure de la table `messages`
 --
--- Création :  lun. 08 mars 2021 à 13:54
+-- Création :  lun. 22 mars 2021 à 13:05
+-- Dernière modification :  lun. 22 mars 2021 à 13:07
 --
 
 DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `content` text NOT NULL,
   `senderUserID` int(11) NOT NULL,
-  `receiverUserID` int(11) NOT NULL,
-  `receiverGroupID` int(11) NOT NULL,
-  `receiverChannelID` int(11) NOT NULL,
+  `receiverUserID` int(11) DEFAULT NULL,
+  `receiverGroupID` int(11) DEFAULT NULL,
+  `receiverChannelID` int(11) DEFAULT NULL,
   `active` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -266,6 +262,7 @@ CREATE TABLE `relationsrolespermissions` (
 -- Structure de la table `relationsrolesusers`
 --
 -- Création :  mer. 10 mars 2021 à 09:23
+-- Dernière modification :  lun. 22 mars 2021 à 12:51
 --
 
 DROP TABLE IF EXISTS `relationsrolesusers`;
@@ -595,7 +592,7 @@ ALTER TABLE `medias`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `permissions`
 --
