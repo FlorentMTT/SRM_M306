@@ -24,9 +24,7 @@ namespace GestionUserSRM
         {
             InitializeComponent();
 
-            Connexion = new frmConnexion();
             Db = new SQLfunction();
-            connexion.Show();
         }
 
         private void frmGestion_Load(object sender, EventArgs e)
@@ -60,11 +58,23 @@ namespace GestionUserSRM
             lblUserSelected.Text = "Utilisateur selectioné : " + lbUser.SelectedValue.ToString();
             
         }
+        private void lbMessages_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gbMessage.Show();
+            lblMessageSelected.Text = "id message selectioné : " + lbMessages.SelectedIndex.ToString();
+            tbxMessageSelectioner.Text = lbMessages.SelectedValue.ToString();
+        }
 
         private void btnBannUser_Click(object sender, EventArgs e)
         {
             db.UpdateUserBanne(1, db.lireUtilisateur(lbUser.SelectedValue.ToString()).id);
             afficheBtnBanned();
+        }
+
+        private void btnUpdateMessage_Click(object sender, EventArgs e)
+        {
+            db.UpdateMessage(tbxMessageSelectioner.Text, lbMessages.SelectedIndex + 1);
+            refreshList();
         }
 
         private void btnDeBannUser_Click(object sender, EventArgs e)

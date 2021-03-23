@@ -10,30 +10,25 @@ namespace GestionUserSRM
 {
     class SQLfunction
     {
-        private MySql.Data.MySqlClient.MySqlConnection connection;
-        private string server;
-        private string database;
-        private string uid;
-        private string password;
 
         //Constructor
         public SQLfunction()
         {
-            Initialize();
+
         }
 
         //Initialize values
-        private void Initialize()
+        private static MySqlConnection GetDbConnection()
         {
-            server = "localhost";
-            database = "m306_srm_db";
-            uid = "userApp";	//Renseigner
-            password = "M306";	//Renseigner
+            string server = "localhost";
+            string database = "m306_srm_db";
+            string uid = "userApp";	//Renseigner
+            string password = "M306";	//Renseigner
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
             database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-            connection = new MySql.Data.MySqlClient.MySqlConnection(connectionString);
+            return new MySql.Data.MySqlClient.MySqlConnection(connectionString);
         }
 
         //open connection to database
@@ -41,26 +36,31 @@ namespace GestionUserSRM
         {
             try
             {
-                connection.Open();
+                GetDbConnection().Open();
                 return true;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 //When handling errors, you can your application's response based 
                 //on the error number.
                 //The two most common error numbers when connecting are as follows:
                 //0: Cannot connect to server.
                 //1045: Invalid user name and/or password.
-                switch (ex.Number)
-                {
-                    case 0:
-                        MessageBox.Show("Cannot connect to server.  Contact administrator");
-                        break;
+                //MySqlException msEx = ex as MySqlException;
+                //if (ex.GetType() == msEx.GetType())
+                //{
+                //    switch (msEx.Number)
+                //    {
+                //        case 0:
+                //            MessageBox.Show("Cannot connect to server. Contact administrator");
+                //            break;
 
-                    case 1045:
-                        MessageBox.Show("Invalid username/password, please try again");
-                        break;
-                }
+                //        case 1045:
+                //            MessageBox.Show("Invalid username/password, please try again");
+                //            break;
+                //    }
+                //}
+
                 return false;
             }
         }
@@ -70,7 +70,7 @@ namespace GestionUserSRM
         {
             try
             {
-                connection.Close();
+                GetDbConnection().Close();
                 return true;
             }
             catch (MySqlException ex)
@@ -97,7 +97,7 @@ namespace GestionUserSRM
             if (this.OpenConnection() == true)
             {
                 //Create Command
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, GetDbConnection());
                 //Create a data reader and Execute the command
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
@@ -125,94 +125,94 @@ namespace GestionUserSRM
             }
         }
 
-        //public List<string>[] SelectMessage()
-        //{
-        //    string query = "SELECT * FROM messages";
+        public List<string>[] SelectMessage()
+        {
+            string query = "SELECT * FROM messages";
 
-        //    //Create a list to store the result
-        //    List<string>[] list = new List<string>[2];
-        //    list[0] = new List<string>();
-        //    list[1] = new List<string>();
+            //Create a list to store the result
+            List<string>[] list = new List<string>[2];
+            list[0] = new List<string>();
+            list[1] = new List<string>();
 
 
 
-        //    //Open connection
-        //    if (this.OpenConnection() == true)
-        //    {
-        //        //Create Command
-        //        MySqlCommand cmd = new MySqlCommand(query, connection);
-        //        //Create a data reader and Execute the command
-        //        MySqlDataReader dataReader = cmd.ExecuteReader();
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //Create Command
+                MySqlCommand cmd = new MySqlCommand(query, GetDbConnection());
+                //Create a data reader and Execute the command
+                MySqlDataReader dataReader = cmd.ExecuteReader();
 
-        //        //Read the data and store them in the list
-        //        while (dataReader.Read())
-        //        {
-        //            list[0].Add(dataReader["id"] + "");
-        //            list[1].Add(dataReader["content"] + "");
-        //        }
+                //Read the data and store them in the list
+                while (dataReader.Read())
+                {
+                    list[0].Add(dataReader["id"] + "");
+                    list[1].Add(dataReader["content"] + "");
+                }
 
-        //        //close Data Reader
-        //        dataReader.Close();
+                //close Data Reader
+                dataReader.Close();
 
-        //        //close Connection
-        //        this.CloseConnection();
+                //close Connection
+                this.CloseConnection();
 
-        //        //return list to be displayed
-        //        return list;
-        //    }
-        //    else
-        //    {
-        //        return list;
-        //    }
-        //}
+                //return list to be displayed
+                return list;
+            }
+            else
+            {
+                return list;
+            }
+        }
 
-        //public void UpdateRole(string name, int role)
-        //{
+        public void UpdateRole(string name, int role)
+        {
 
-        //    string query = "UPDATE users SET idRole='" + role + "' WHERE name='" + name + "'";
+            string query = "UPDATE users SET idRole='" + role + "' WHERE name='" + name + "'";
 
-        //    //Open connection
-        //    if (this.OpenConnection() == true)
-        //    {
-        //        //create mysql command
-        //        MySqlCommand cmd = new MySqlCommand();
-        //        //Assign the query using CommandText
-        //        cmd.CommandText = query;
-        //        //Assign the connection using Connection
-        //        cmd.Connection = connection;
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = GetDbConnection();
 
-        //        //Execute query
-        //        cmd.ExecuteNonQuery();
+                //Execute query
+                cmd.ExecuteNonQuery();
 
-        //        //close connection
-        //        this.CloseConnection();
-        //    }
+                //close connection
+                this.CloseConnection();
+            }
 
-        //}
-        
-        //public void UpdateMessage(string message, int idMessage)
-        //{
+        }
 
-        //    string query = "UPDATE message SET message='" + message + "' WHERE idMessage='" + idMessage + "'";
+        public void UpdateMessage(string message, int idMessage)
+        {
 
-        //    //Open connection
-        //    if (this.OpenConnection() == true)
-        //    {
-        //        //create mysql command
-        //        MySqlCommand cmd = new MySqlCommand();
-        //        //Assign the query using CommandText
-        //        cmd.CommandText = query;
-        //        //Assign the connection using Connection
-        //        cmd.Connection = connection;
+            string query = "UPDATE message SET message='" + message + "' WHERE idMessage='" + idMessage + "'";
 
-        //        //Execute query
-        //        cmd.ExecuteNonQuery();
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = GetDbConnection();
 
-        //        //close connection
-        //        this.CloseConnection();
-        //    }
+                //Execute query
+                cmd.ExecuteNonQuery();
 
-        //}
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
 
         public void UpdateUserBanne(int active, int id)
         {
@@ -227,7 +227,7 @@ namespace GestionUserSRM
                 //Assign the query using CommandText
                 cmd.CommandText = query;
                 //Assign the connection using Connection
-                cmd.Connection = connection;
+                cmd.Connection = GetDbConnection();
 
                 //Execute query
                 cmd.ExecuteNonQuery();
@@ -246,7 +246,7 @@ namespace GestionUserSRM
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, GetDbConnection());
 
                 //Execute command
                 cmd.ExecuteNonQuery();
@@ -264,7 +264,7 @@ namespace GestionUserSRM
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, GetDbConnection());
 
                 //Execute command
                 cmd.ExecuteNonQuery();
@@ -282,7 +282,7 @@ namespace GestionUserSRM
             if (this.OpenConnection() == true)
             {
                 //create command and assign the query and connection from the constructor
-                MySqlCommand cmd = new MySqlCommand(query, connection);
+                MySqlCommand cmd = new MySqlCommand(query, GetDbConnection());
                 cmd.Parameters.AddWithValue("@email", aLire);
 
                 MySqlDataReader dataReader = cmd.ExecuteReader();
