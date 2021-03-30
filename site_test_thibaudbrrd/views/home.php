@@ -12,10 +12,4 @@ $pageTitle = "Home";
 include "header.php";
 
 ?>
-<div class="card col-sm-12">
-    <div class="container card-body">
-        
-    </div>
-</div>
 
-<?php include "footer.php" ?>

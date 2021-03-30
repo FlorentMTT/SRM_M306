@@ -148,11 +148,12 @@ namespace GestionUserSRM
                 //    //  lblError.Text = "successful connection";
                 //    this.DialogResult = DialogResult.OK;
                 //}
-                //else {
+                //else
+                //{
                 //    lblError.Text = "Vous n'etes pas admin !";
 
                 //}
-
+                ErrorMsg = "oui";
                 this.DialogResult = DialogResult.OK;
              
             }

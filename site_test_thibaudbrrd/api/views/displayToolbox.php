@@ -131,8 +131,8 @@ function displayListProfilPicture($data) {
     // Processing
     foreach ($data as $key => $row) {
         $output .= '<li class="list-group-item d-flex justify-content-between align-items-center position-relative">';
-        $output .= '<a onclick="callChannels(' . $row['id'] . ')" class="rounded-circle">';
-        $output .= '<img src="ressources_medias/groups/' . $row['profilPictureURL'] . '" class="rounded-circle w-100" alt="' . $row['profilPictureURL'] . '">';
+        $output .= '<a onclick="callChannels(' . $row['id'] . ')" class="rounded-circle"> ';
+        $output .= '<img src="ressources_medias/groups/' . $row['profilPictureURL'] . '" class="rounded-circle" style="height: 75px;" alt="' . $row['profilPictureURL'] . '">';
         //$output .= '<span class="badge badge-danger badge-pill position-absolute" style="right:20%; bottom:10%;">1</span>';
         $output .= '</a>';
         $output .= '</li>';
@@ -155,7 +155,7 @@ function displayListChannels($data) {
     
     foreach ($data as $key => $row) {
         $output .= '<li class="list-group-item d-flex justify-content-between align-items-center position-relative">';
-        $output .= '<button onclick="callMessages(' . $row['id'] . ')" class="btn btn-secondary">' . $row['name'] . '</button>';
+        $output .= '<button onclick="callMessages(' . $row['id'] . ')" class="btn btn-secondary btn-sm">' . $row['name'] . '</button>';
         $output .= '</li>';
     }
 

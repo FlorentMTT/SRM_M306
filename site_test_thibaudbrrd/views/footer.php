@@ -7,7 +7,7 @@
 
 ?>
 
-            <footer>
+            <footer style="margin-top:10%">
                 <div class="card col-sm-12">
                     <div class="card-body text-center">
                         &copy; M306_SRM 2021, créé par l'équipe Jaune
