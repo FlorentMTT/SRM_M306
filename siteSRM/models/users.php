@@ -21,7 +21,7 @@ function getAllUsers()
     $requete->execute();
     $requete = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    $requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
+    //$requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
     
     return $requete;
 }
@@ -42,7 +42,7 @@ function getUserByID($userID)
     $requete->execute();
     $requete = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    $requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
+    //$requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
     
     return $requete;
 }

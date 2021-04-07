@@ -52,3 +52,4 @@ function getAllMessagesForGroupChannel($idChannel)
     
     return $query;
 }
+

@@ -7,7 +7,7 @@
 
 define("DB_NAME", "m306_srm_db");
 define("DB_USER", "root");
-define("DB_PASSWORD", "Super2020");
+define("DB_PASSWORD", "root");
 
 function connectDB()
 {
