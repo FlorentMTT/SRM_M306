@@ -10,9 +10,9 @@ include "../models/messages.php";
 $response = [];
 
 $channelID = filter_input(INPUT_GET, 'channelID', FILTER_VALIDATE_INT);
+$nbMessages = filter_input(INPUT_GET, 'nbMessages', FILTER_VALIDATE_INT);
 
-$response['count'] = CountAllMessagesForGroupChannel($channelID);
-$response['messages'] = GetAllMessagesForGroupChannel($channelID);
+$response = GetAllNewMessagesForGroupChannel($channelID, $nbMessages);
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type:application/json');

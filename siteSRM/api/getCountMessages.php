@@ -11,8 +11,7 @@ $response = [];
 
 $channelID = filter_input(INPUT_GET, 'channelID', FILTER_VALIDATE_INT);
 
-$response['count'] = CountAllMessagesForGroupChannel($channelID);
-$response['messages'] = GetAllMessagesForGroupChannel($channelID);
+$response = CountAllMessagesForGroupChannel($channelID);
 
 header('Access-Control-Allow-Origin: *');
 header('Content-Type:application/json');
