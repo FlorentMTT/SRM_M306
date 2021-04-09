@@ -21,7 +21,7 @@ function getAllUsers()
     $requete->execute();
     $requete = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    //$requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
+    $requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
     
     return $requete;
 }
@@ -42,7 +42,7 @@ function getUserByID($userID)
     $requete->execute();
     $requete = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    //$requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
+    $requete = transformImageURLToHtmlImgTag($requete, 'Image de profile', 'Surnom');
     
     return $requete;
 }
@@ -74,6 +74,19 @@ function getUserByIDWithRoles($userID)
     $requete->bindParam('userID', $userID, PDO::PARAM_INT, 11);
     $requete->execute();
     return $requete->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function createUser($email, $password, $name) {
+    $connexion = connectDB();
+    $requete = $connexion->prepare(
+        "INSERT INTO `users` (`email`, `password`, `name`, `profilPictureURL`)
+        VALUES (:email, :password, :name, 'default.png')");
+    $requete->bindParam('email', $email, PDO::PARAM_STR, 100);
+    $requete->bindParam('password', $password, PDO::PARAM_STR, 64);
+    $requete->bindParam('name', $name, PDO::PARAM_STR, 30);
+    $requete->execute();
+
+    return $connexion->LastInsertID();
 }
 
 function checkUserByEmailPassword($email, $password)

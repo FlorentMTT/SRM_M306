@@ -3,23 +3,17 @@
 // Script: Modèle API getMessages.php
 // Description: endpoint de récupération de la table messages.
 // Auteur: Thibaud Briard
-// Version 1.0.0 PC 22.03.2021, version initial
-include "models/messages.php";
+// Version 1.0.0 PC 07.04.2021, version initial
 
-include "views/displayToolbox.php";
+include "../models/messages.php";
 
-$channelID = filter_input(INPUT_GET, "channelID", FILTER_VALIDATE_INT);
+$response = [];
 
-echo(getGroups($channelID));
+$channelID = filter_input(INPUT_GET, 'channelID', FILTER_VALIDATE_INT);
 
-function getGroups($channelID) {
-    // Initialize
-    $output = '';
+$response['count'] = CountAllMessagesForGroupChannel($channelID);
+$response['messages'] = GetAllMessagesForGroupChannel($channelID);
 
-    // Processing
-    $data = getAllMessagesForGroupChannel($channelID);
-    $output .= displayListMessages($data);
-
-    // Exit
-    return $output;
-}
+header('Access-Control-Allow-Origin: *');
+header('Content-Type:application/json');
+echo(json_encode($response));

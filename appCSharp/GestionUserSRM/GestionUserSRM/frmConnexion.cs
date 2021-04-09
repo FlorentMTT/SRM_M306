@@ -112,6 +112,7 @@ namespace GestionUserSRM
             User = tbxUser.Text;
             Password = tbxPassword.Text;
             ValidateEntre();
+            lblError.Text = ErrorMsg;
         }
 
 
@@ -154,8 +155,8 @@ namespace GestionUserSRM
 
                 //}
                 ErrorMsg = "oui";
-                this.DialogResult = DialogResult.OK;
-             
+               this.DialogResult = DialogResult.OK;
+
             }
             else
             {

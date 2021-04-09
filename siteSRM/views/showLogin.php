@@ -22,7 +22,7 @@ if (filter_has_var(INPUT_POST,'submit')) {
     $_SESSION['info_client']['date_last_action'] = date("Y-m-d H:i:s");
     if ($response[0]) {
         $_SESSION['info_client']['user'] = $response[1];
-        header("location:index.php");
+        header("location:discussion.php");
         exit;
     }
     else {

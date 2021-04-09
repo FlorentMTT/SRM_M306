@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GestionUserSRM
@@ -55,41 +49,29 @@ namespace GestionUserSRM
         private void lbUser_SelectedIndexChanged(object sender, EventArgs e)
         {
             gbOptionUser.Show();
-            lblUserSelected.Text = "Utilisateur selectioné : " + lbUser.SelectedValue.ToString();
+            lblUserSelected.Text = "Utilisateur selectioné : " + lbReport.SelectedValue.ToString();
             
-        }
-        private void lbMessages_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            gbMessage.Show();
-            lblMessageSelected.Text = "id message selectioné : " + lbMessages.SelectedIndex.ToString();
-            tbxMessageSelectioner.Text = lbMessages.SelectedValue.ToString();
-        }
+        }        
 
         private void btnBannUser_Click(object sender, EventArgs e)
         {
-            db.UpdateUserBanne(1, db.lireUtilisateur(lbUser.SelectedValue.ToString()).id);
+            db.UpdateUserBanne(1, db.lireUtilisateur(lbReport.SelectedValue.ToString()).id);
             afficheBtnBanned();
-        }
-
-        private void btnUpdateMessage_Click(object sender, EventArgs e)
-        {
-            db.UpdateMessage(tbxMessageSelectioner.Text, lbMessages.SelectedIndex + 1);
-            refreshList();
         }
 
         private void btnDeBannUser_Click(object sender, EventArgs e)
         {
-            db.UpdateUserBanne(0, db.lireUtilisateur(lbUser.SelectedValue.ToString()).id);
+            db.UpdateUserBanne(0, db.lireUtilisateur(lbReport.SelectedValue.ToString()).id);
             afficheBtnBanned();
         }
 
         public void refreshList()
         {
-            lbUser.DataSource = Db.Select()[1];         
+            lbReport.DataSource = Db.SelectReportedMessages()[1];  
         }
         public void afficheBtnBanned()
         {
-            if (db.lireUtilisateur(lbUser.SelectedValue.ToString()).active)
+            if (db.lireUtilisateur(lbReport.SelectedValue.ToString()).active)
             {
                 btnBannUser.Enabled = false;
                 btnBannUser.BackColor = Color.FromArgb(30, 61, 89);
@@ -105,6 +87,11 @@ namespace GestionUserSRM
                 btnDeBannUser.Enabled = false;
                 btnDeBannUser.BackColor = Color.FromArgb(30, 61, 89);
             }
+        }
+
+        private void aProposToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            refreshList();
         }
     }
 }

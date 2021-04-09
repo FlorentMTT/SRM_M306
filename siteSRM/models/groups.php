@@ -13,13 +13,15 @@ require_once 'models/dbConnect.php';
  */
 function GetAllGroupsForUser($userID)
 {
-    $connexion = connectDB();
-    $query = $connexion->prepare(
-        "SELECT `g`.`id`, `g`.`name`, `g`.`profilPictureURL`
-        FROM `groups` as g
-        LEFT JOIN `relationsgroupsusers` as rgu ON `g`.`id` = `rgu`.`groupID`
+    $connect = connectDB();
+    $query = $connect->prepare(
+        "SELECT `g`.`id`, `g`.`name`, `g`.`profilPictureURL`, GROUP_CONCAT(CONCAT(`c`.`id`, ':', `c`.`name`, ':', `c`.`place`) ORDER BY c.place ASC SEPARATOR ' | ') AS 'channels'
+        FROM `groups` AS g
+        LEFT JOIN `channels` AS c ON `g`.`id` = `c`.`groupID`
+        LEFT JOIN `relationsgroupsusers` AS rgu ON `g`.`id` = `rgu`.`groupID`
         WHERE `g`.`active` = 1
-        AND `rgu`.`userID` = :userID");
+        AND `rgu`.`userID` = :userID
+        GROUP BY `g`.`id`");
     $query->bindParam('userID', $userID, PDO::PARAM_INT, 11);
     $query->execute();
     $query = $query->fetchAll(PDO::FETCH_ASSOC);
