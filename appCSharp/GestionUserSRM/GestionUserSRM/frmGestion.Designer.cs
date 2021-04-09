@@ -36,13 +36,22 @@
             this.aProposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbReport = new System.Windows.Forms.ListBox();
             this.lblUserCo = new System.Windows.Forms.Label();
-            this.btnDeleteUser = new System.Windows.Forms.Button();
-            this.btnBannUser = new System.Windows.Forms.Button();
-            this.btnDeBannUser = new System.Windows.Forms.Button();
-            this.lblUserSelected = new System.Windows.Forms.Label();
-            this.gbOptionUser = new System.Windows.Forms.GroupBox();
+            this.gbxMessage = new System.Windows.Forms.GroupBox();
+            this.tbxMessageContent = new System.Windows.Forms.TextBox();
+            this.btnMessageBan = new System.Windows.Forms.Button();
+            this.btnSenderBan = new System.Windows.Forms.Button();
+            this.tbxSenderName = new System.Windows.Forms.TextBox();
+            this.gbxSender = new System.Windows.Forms.GroupBox();
+            this.btnReceiverBan = new System.Windows.Forms.Button();
+            this.tbxReceiverName = new System.Windows.Forms.TextBox();
+            this.gbxReceiver = new System.Windows.Forms.GroupBox();
+            this.tbxMessageId = new System.Windows.Forms.TextBox();
+            this.tbxSenderId = new System.Windows.Forms.TextBox();
+            this.tbxReceiverId = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
-            this.gbOptionUser.SuspendLayout();
+            this.gbxMessage.SuspendLayout();
+            this.gbxSender.SuspendLayout();
+            this.gbxReceiver.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -110,77 +119,125 @@
             this.lblUserCo.TabIndex = 2;
             this.lblUserCo.Text = "Vous etes connecter en tant que ...";
             // 
-            // btnDeleteUser
+            // gbxMessage
             // 
-            this.btnDeleteUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(26)))), ((int)(((byte)(41)))));
-            this.btnDeleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteUser.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteUser.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteUser.Location = new System.Drawing.Point(9, 29);
-            this.btnDeleteUser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.Size = new System.Drawing.Size(140, 48);
-            this.btnDeleteUser.TabIndex = 0;
-            this.btnDeleteUser.Text = "Suprimer";
-            this.btnDeleteUser.UseVisualStyleBackColor = false;
+            this.gbxMessage.Controls.Add(this.tbxMessageId);
+            this.gbxMessage.Controls.Add(this.btnMessageBan);
+            this.gbxMessage.Controls.Add(this.tbxMessageContent);
+            this.gbxMessage.Location = new System.Drawing.Point(463, 112);
+            this.gbxMessage.Name = "gbxMessage";
+            this.gbxMessage.Size = new System.Drawing.Size(365, 100);
+            this.gbxMessage.TabIndex = 4;
+            this.gbxMessage.TabStop = false;
+            this.gbxMessage.Text = "Message";
             // 
-            // btnBannUser
+            // tbxMessageContent
             // 
-            this.btnBannUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(26)))), ((int)(((byte)(41)))));
-            this.btnBannUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBannUser.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBannUser.ForeColor = System.Drawing.Color.White;
-            this.btnBannUser.Location = new System.Drawing.Point(158, 29);
-            this.btnBannUser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnBannUser.Name = "btnBannUser";
-            this.btnBannUser.Size = new System.Drawing.Size(140, 48);
-            this.btnBannUser.TabIndex = 1;
-            this.btnBannUser.Text = "Bannir";
-            this.btnBannUser.UseVisualStyleBackColor = false;
-            this.btnBannUser.Click += new System.EventHandler(this.btnBannUser_Click);
+            this.tbxMessageContent.Location = new System.Drawing.Point(9, 59);
+            this.tbxMessageContent.Name = "tbxMessageContent";
+            this.tbxMessageContent.ReadOnly = true;
+            this.tbxMessageContent.Size = new System.Drawing.Size(228, 26);
+            this.tbxMessageContent.TabIndex = 0;
+            this.tbxMessageContent.Text = "Le contenu";
             // 
-            // btnDeBannUser
+            // btnMessageBan
             // 
-            this.btnDeBannUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(26)))), ((int)(((byte)(41)))));
-            this.btnDeBannUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeBannUser.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeBannUser.ForeColor = System.Drawing.Color.White;
-            this.btnDeBannUser.Location = new System.Drawing.Point(158, 87);
-            this.btnDeBannUser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.btnDeBannUser.Name = "btnDeBannUser";
-            this.btnDeBannUser.Size = new System.Drawing.Size(140, 48);
-            this.btnDeBannUser.TabIndex = 3;
-            this.btnDeBannUser.Text = "DéBannir";
-            this.btnDeBannUser.UseVisualStyleBackColor = false;
-            this.btnDeBannUser.Click += new System.EventHandler(this.btnDeBannUser_Click);
+            this.btnMessageBan.Location = new System.Drawing.Point(258, 25);
+            this.btnMessageBan.Name = "btnMessageBan";
+            this.btnMessageBan.Size = new System.Drawing.Size(101, 60);
+            this.btnMessageBan.TabIndex = 1;
+            this.btnMessageBan.Text = "Ban";
+            this.btnMessageBan.UseVisualStyleBackColor = true;
+            this.btnMessageBan.Click += new System.EventHandler(this.btnMessageBan_Click);
             // 
-            // lblUserSelected
+            // btnSenderBan
             // 
-            this.lblUserSelected.AutoSize = true;
-            this.lblUserSelected.Font = new System.Drawing.Font("Arial", 11.25F);
-            this.lblUserSelected.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(215)))), ((int)(((byte)(38)))), ((int)(((byte)(49)))));
-            this.lblUserSelected.Location = new System.Drawing.Point(9, 148);
-            this.lblUserSelected.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblUserSelected.Name = "lblUserSelected";
-            this.lblUserSelected.Size = new System.Drawing.Size(233, 26);
-            this.lblUserSelected.TabIndex = 6;
-            this.lblUserSelected.Text = "Utilisateur Selectioner";
+            this.btnSenderBan.Location = new System.Drawing.Point(258, 25);
+            this.btnSenderBan.Name = "btnSenderBan";
+            this.btnSenderBan.Size = new System.Drawing.Size(101, 60);
+            this.btnSenderBan.TabIndex = 1;
+            this.btnSenderBan.Text = "Ban";
+            this.btnSenderBan.UseVisualStyleBackColor = true;
+            this.btnSenderBan.Click += new System.EventHandler(this.btnSenderBan_Click);
             // 
-            // gbOptionUser
+            // tbxSenderName
             // 
-            this.gbOptionUser.Controls.Add(this.lblUserSelected);
-            this.gbOptionUser.Controls.Add(this.btnDeBannUser);
-            this.gbOptionUser.Controls.Add(this.btnBannUser);
-            this.gbOptionUser.Controls.Add(this.btnDeleteUser);
-            this.gbOptionUser.Location = new System.Drawing.Point(464, 112);
-            this.gbOptionUser.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbOptionUser.Name = "gbOptionUser";
-            this.gbOptionUser.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbOptionUser.Size = new System.Drawing.Size(364, 186);
-            this.gbOptionUser.TabIndex = 3;
-            this.gbOptionUser.TabStop = false;
-            this.gbOptionUser.Text = "Option de reports";
-            this.gbOptionUser.Visible = false;
+            this.tbxSenderName.Location = new System.Drawing.Point(9, 59);
+            this.tbxSenderName.Name = "tbxSenderName";
+            this.tbxSenderName.ReadOnly = true;
+            this.tbxSenderName.Size = new System.Drawing.Size(228, 26);
+            this.tbxSenderName.TabIndex = 0;
+            this.tbxSenderName.Text = "Le nom";
+            // 
+            // gbxSender
+            // 
+            this.gbxSender.Controls.Add(this.tbxSenderId);
+            this.gbxSender.Controls.Add(this.btnSenderBan);
+            this.gbxSender.Controls.Add(this.tbxSenderName);
+            this.gbxSender.Location = new System.Drawing.Point(463, 281);
+            this.gbxSender.Name = "gbxSender";
+            this.gbxSender.Size = new System.Drawing.Size(365, 100);
+            this.gbxSender.TabIndex = 5;
+            this.gbxSender.TabStop = false;
+            this.gbxSender.Text = "Sender";
+            // 
+            // btnReceiverBan
+            // 
+            this.btnReceiverBan.Location = new System.Drawing.Point(258, 25);
+            this.btnReceiverBan.Name = "btnReceiverBan";
+            this.btnReceiverBan.Size = new System.Drawing.Size(101, 60);
+            this.btnReceiverBan.TabIndex = 1;
+            this.btnReceiverBan.Text = "Ban";
+            this.btnReceiverBan.UseVisualStyleBackColor = true;
+            this.btnReceiverBan.Click += new System.EventHandler(this.btnReceiverBan_Click);
+            // 
+            // tbxReceiverName
+            // 
+            this.tbxReceiverName.Location = new System.Drawing.Point(9, 59);
+            this.tbxReceiverName.Name = "tbxReceiverName";
+            this.tbxReceiverName.ReadOnly = true;
+            this.tbxReceiverName.Size = new System.Drawing.Size(228, 26);
+            this.tbxReceiverName.TabIndex = 0;
+            this.tbxReceiverName.Text = "Le nom";
+            // 
+            // gbxReceiver
+            // 
+            this.gbxReceiver.Controls.Add(this.tbxReceiverId);
+            this.gbxReceiver.Controls.Add(this.btnReceiverBan);
+            this.gbxReceiver.Controls.Add(this.tbxReceiverName);
+            this.gbxReceiver.Location = new System.Drawing.Point(463, 439);
+            this.gbxReceiver.Name = "gbxReceiver";
+            this.gbxReceiver.Size = new System.Drawing.Size(365, 100);
+            this.gbxReceiver.TabIndex = 5;
+            this.gbxReceiver.TabStop = false;
+            this.gbxReceiver.Text = "Receiver";
+            // 
+            // tbxMessageId
+            // 
+            this.tbxMessageId.Location = new System.Drawing.Point(9, 25);
+            this.tbxMessageId.Name = "tbxMessageId";
+            this.tbxMessageId.ReadOnly = true;
+            this.tbxMessageId.Size = new System.Drawing.Size(228, 26);
+            this.tbxMessageId.TabIndex = 2;
+            this.tbxMessageId.Text = "L\'id";
+            // 
+            // tbxSenderId
+            // 
+            this.tbxSenderId.Location = new System.Drawing.Point(9, 25);
+            this.tbxSenderId.Name = "tbxSenderId";
+            this.tbxSenderId.ReadOnly = true;
+            this.tbxSenderId.Size = new System.Drawing.Size(228, 26);
+            this.tbxSenderId.TabIndex = 2;
+            this.tbxSenderId.Text = "L\'id";
+            // 
+            // tbxReceiverId
+            // 
+            this.tbxReceiverId.Location = new System.Drawing.Point(9, 25);
+            this.tbxReceiverId.Name = "tbxReceiverId";
+            this.tbxReceiverId.ReadOnly = true;
+            this.tbxReceiverId.Size = new System.Drawing.Size(228, 26);
+            this.tbxReceiverId.TabIndex = 2;
+            this.tbxReceiverId.Text = "L\'id";
             // 
             // frmGestion
             // 
@@ -188,7 +245,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(152)))), ((int)(((byte)(238)))));
             this.ClientSize = new System.Drawing.Size(841, 615);
-            this.Controls.Add(this.gbOptionUser);
+            this.Controls.Add(this.gbxMessage);
+            this.Controls.Add(this.gbxReceiver);
+            this.Controls.Add(this.gbxSender);
             this.Controls.Add(this.lblUserCo);
             this.Controls.Add(this.lbReport);
             this.Controls.Add(this.menuStrip1);
@@ -202,8 +261,12 @@
             this.Load += new System.EventHandler(this.frmGestion_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.gbOptionUser.ResumeLayout(false);
-            this.gbOptionUser.PerformLayout();
+            this.gbxMessage.ResumeLayout(false);
+            this.gbxMessage.PerformLayout();
+            this.gbxSender.ResumeLayout(false);
+            this.gbxSender.PerformLayout();
+            this.gbxReceiver.ResumeLayout(false);
+            this.gbxReceiver.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,10 +281,17 @@
         private System.Windows.Forms.ToolStripMenuItem aProposToolStripMenuItem;
         private System.Windows.Forms.ListBox lbReport;
         private System.Windows.Forms.Label lblUserCo;
-        private System.Windows.Forms.Button btnDeleteUser;
-        private System.Windows.Forms.Button btnBannUser;
-        private System.Windows.Forms.Button btnDeBannUser;
-        private System.Windows.Forms.Label lblUserSelected;
-        private System.Windows.Forms.GroupBox gbOptionUser;
+        private System.Windows.Forms.GroupBox gbxMessage;
+        private System.Windows.Forms.TextBox tbxMessageId;
+        private System.Windows.Forms.Button btnMessageBan;
+        private System.Windows.Forms.TextBox tbxMessageContent;
+        private System.Windows.Forms.Button btnSenderBan;
+        private System.Windows.Forms.TextBox tbxSenderName;
+        private System.Windows.Forms.GroupBox gbxSender;
+        private System.Windows.Forms.TextBox tbxSenderId;
+        private System.Windows.Forms.Button btnReceiverBan;
+        private System.Windows.Forms.TextBox tbxReceiverName;
+        private System.Windows.Forms.GroupBox gbxReceiver;
+        private System.Windows.Forms.TextBox tbxReceiverId;
     }
 }

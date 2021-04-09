@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,6 +14,9 @@ namespace GestionUserSRM
         // propriété
         public frmConnexion Connexion { get => connexion; set => connexion = value; }
         internal SQLfunction Db { get => db; set => db = value; }
+
+        public List<Report> reportsList;
+
 
         public frmGestion()
         {
@@ -48,50 +52,52 @@ namespace GestionUserSRM
 
         private void lbUser_SelectedIndexChanged(object sender, EventArgs e)
         {
-            gbOptionUser.Show();
-            lblUserSelected.Text = "Utilisateur selectioné : " + lbReport.SelectedValue.ToString();
-            
-        }        
+            string selectedItem = lbReport.SelectedItem.ToString();
+            int selectedID = Convert.ToInt32(selectedItem.Split(new string[] { " : " }, StringSplitOptions.None)[0]);
+            Report selectedReport = reportsList.Find(item => item.ReportID == selectedID);
 
-        private void btnBannUser_Click(object sender, EventArgs e)
-        {
-            db.UpdateUserBanne(1, db.lireUtilisateur(lbReport.SelectedValue.ToString()).id);
-            afficheBtnBanned();
-        }
+            gbxMessage.Show();
+            gbxSender.Show();
+            gbxReceiver.Show();
 
-        private void btnDeBannUser_Click(object sender, EventArgs e)
-        {
-            db.UpdateUserBanne(0, db.lireUtilisateur(lbReport.SelectedValue.ToString()).id);
-            afficheBtnBanned();
+            tbxMessageId.Text = selectedReport.MessageID.ToString();
+            tbxMessageContent.Text = selectedReport.MessageContent;
+
+            tbxSenderId.Text = selectedReport.SenderID.ToString();
+            tbxSenderName.Text = selectedReport.SenderName;
+
+            tbxReceiverId.Text = selectedReport.ReceiverID.ToString();
+            tbxReceiverName.Text = selectedReport.ReceiverName;
         }
 
         public void refreshList()
         {
-            lbReport.DataSource = Db.SelectReportedMessages()[1];  
-        }
-        public void afficheBtnBanned()
-        {
-            if (db.lireUtilisateur(lbReport.SelectedValue.ToString()).active)
+            reportsList = db.lireReports();
+            lbReport.Items.Clear();
+            foreach (Report report in reportsList)
             {
-                btnBannUser.Enabled = false;
-                btnBannUser.BackColor = Color.FromArgb(30, 61, 89);
-                btnDeBannUser.Enabled = true;
-                btnDeBannUser.BackColor = Color.FromArgb(7, 123, 138);
-
-
-            }
-            else
-            {
-                btnBannUser.Enabled = true;
-                btnBannUser.BackColor = Color.FromArgb(7, 123, 138);
-                btnDeBannUser.Enabled = false;
-                btnDeBannUser.BackColor = Color.FromArgb(30, 61, 89);
+                lbReport.Items.Add(report);
             }
         }
 
         private void aProposToolStripMenuItem_Click(object sender, EventArgs e)
         {
             refreshList();
+        }
+
+        private void btnMessageBan_Click(object sender, EventArgs e)
+        {
+            db.UpdateMessageBan(1, Convert.ToInt32(tbxMessageId.Text));
+        }
+
+        private void btnSenderBan_Click(object sender, EventArgs e)
+        {
+            db.UpdateUserBan(1, Convert.ToInt32(tbxSenderId.Text));
+        }
+
+        private void btnReceiverBan_Click(object sender, EventArgs e)
+        {
+            db.UpdateGroupBan(1, Convert.ToInt32(tbxReceiverId.Text));
         }
     }
 }

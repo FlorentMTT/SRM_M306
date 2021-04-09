@@ -17,3 +17,26 @@ Le journal de bord est disponible dans le dossier documents du github
 ### Description
 Super Rapide Messages (SRM) est un système de messagerie permettant d'échanger des messages avec différentes personnes.
 Le projet possède deux interfaces, une interface de type web pour l'utilisateur du service et une application windows permettant de gérer la partie administration des discussions.
+
+# Installation
+## Prérequis
+### Un ordinateur personnel
+### Un serveur Apache avec une configuration MySQL
+### Un navigateur web
+
+## Installation BDD
+Créer une nouvelle base de données dans votre système de gestion de bdd préféré.
+nom : "m306_srm_db"
+Importer le fichier "m306_srm_db.sql" dans la bdd.
+
+## Installation Application WEB
+Déplacer le dossier siteSRM dans votre repository php de votre serveur Apache.
+Ouvrir avec le navigateur en se dirigant sur la page localhost puis ensuite cliquer sur siteSRM
+nom utilisateur : "barack.afritt@email.com" // mot de passe : "Super" 
+
+## Installation Application C#
+Vous pourrez retrouver l'application dans le dossier appCSharp\GestionUserSRM\GestionUserSRM\bin\Debug
+ 
+
+
+

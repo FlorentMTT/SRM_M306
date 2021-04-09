@@ -2,10 +2,10 @@
 // Projet: M306_SRM
 // Script: Vue login.php
 // Description: Page de connexion du site
-// Auteur: Briard Thibaud
+// Auteur: Favre Steven
 // Version 1.0.0 PC 08.03.2021 / Codage initial
 
-$pageTitle = "Log in";
+$pageTitle = "Sign in";
 
 include "initialize.php";
 include "models/users.php";

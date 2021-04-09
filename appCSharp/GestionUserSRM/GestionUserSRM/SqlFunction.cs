@@ -178,20 +178,18 @@ namespace GestionUserSRM
 
         public List<string>[] SelectReportedMessages()
         {
-            string query = "SELECT `r`.`id` AS 'id', `m`.`content` AS 'content', `su`.`name` AS 'sender', (CASE WHEN `m`.`receiveruserid` IS NOT NULL THEN concat('user', `ru`.`name`) ELSE concat('group ', `rg`.`name`) END) AS 'receiver'"
-                + " FROM `reports` AS r"
-                + " LEFT JOIN `messages` AS m ON `r`.`targetedMessageID` = `m`.`id`" 
-                + " LEFT JOIN `users` AS su ON `m`.`senderUserID` = `su`.`id`"
-                + " LEFT JOIN `users` AS ru ON `m`.`receiverUserID` = `ru`.`id`"
-                + " LEFT JOIN `groups` AS rg ON `m`.`receiverGroupID` = `rg`.`id`";
+            string query = "SELECT `r`.`id` AS 'reportID', `r`.`description` AS 'reportDescription', `m`.`id` AS 'messageID', `m`.`content` AS 'messageContent', `su`.`id` AS 'senderID', `su`.`name` AS 'senderName', (CASE WHEN `m`.`receiveruserid` IS NOT NULL THEN concat('user', `ru`.`id`) ELSE concat('group ', `rg`.`id`) END) AS 'receiverID', (CASE WHEN `m`.`receiveruserid` IS NOT NULL THEN concat('user', `ru`.`name`) ELSE concat('group ', `rg`.`name`) END) AS 'receiverName' FROM `reports` AS r LEFT JOIN `messages` AS m ON `r`.`targetedMessageID` = `m`.`id` LEFT JOIN `users` AS su ON `m`.`senderUserID` = `su`.`id` LEFT JOIN `users` AS ru ON `m`.`receiverUserID` = `ru`.`id` LEFT JOIN `groups` AS rg ON `m`.`receiverGroupID` = `rg`.`id`";
 
             //Create a list to store the result
-            List<string>[] list = new List<string>[3];
+            List<string>[] list = new List<string>[8];
             list[0] = new List<string>();
             list[1] = new List<string>();
             list[2] = new List<string>();
-
-
+            list[3] = new List<string>();
+            list[4] = new List<string>();
+            list[5] = new List<string>();
+            list[6] = new List<string>();
+            list[7] = new List<string>();
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -204,9 +202,14 @@ namespace GestionUserSRM
                 //Read the data and store them in the list
                 while (dataReader.Read())
                 {
-                    list[0].Add(dataReader["id"] + "");
-                    list[1].Add(dataReader["content"] + "");
-                    list[2].Add(dataReader["sender"] + "");
+                    list[0].Add(dataReader["reportID"] + "");
+                    list[1].Add(dataReader["reportDescription"] + "");
+                    list[2].Add(dataReader["messageID"] + "");
+                    list[3].Add(dataReader["messageContent"] + "");
+                    list[4].Add(dataReader["senderID"] + "");
+                    list[5].Add(dataReader["senderName"] + "");
+                    list[6].Add(dataReader["receiverID"] + "");
+                    list[7].Add(dataReader["receiverName"] + "");
                 }
 
                 //close Data Reader
@@ -271,11 +274,57 @@ namespace GestionUserSRM
         //    }
 
         //}
+        public void UpdateMessageBan(int active, int id)
+        {
 
-        public void UpdateUserBanne(int active, int id)
+            string query = "UPDATE messages SET active='" + active + "' WHERE id='" + id + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+
+        public void UpdateUserBan(int active, int id)
         {
 
             string query = "UPDATE users SET active='" + active + "' WHERE id='" + id + "'";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+
+        }
+        public void UpdateGroupBan(int active, int id)
+        {
+
+            string query = "UPDATE groups SET active='" + active + "' WHERE id='" + id + "'";
 
             //Open connection
             if (this.OpenConnection() == true)
@@ -388,6 +437,35 @@ namespace GestionUserSRM
             }
 
             return messages;
+        }
+
+        public List<Report> lireReports()
+        {
+
+            List<Report> reportsList = new List<Report>();
+            string query = "SELECT `r`.`id` AS 'reportID', `r`.`description` AS 'reportDescription', `m`.`id` AS 'messageID', `m`.`content` AS 'messageContent', `su`.`id` AS 'senderID', `su`.`name` AS 'senderName', (CASE WHEN `m`.`receiveruserid` IS NOT NULL THEN `ru`.`id` ELSE `rg`.`id` END) AS 'receiverID', (CASE WHEN `m`.`receiveruserid` IS NOT NULL THEN concat('user', `ru`.`name`) ELSE concat('group ', `rg`.`name`) END) AS 'receiverName' FROM `reports` AS r LEFT JOIN `messages` AS m ON `r`.`targetedMessageID` = `m`.`id` LEFT JOIN `users` AS su ON `m`.`senderUserID` = `su`.`id` LEFT JOIN `users` AS ru ON `m`.`receiverUserID` = `ru`.`id` LEFT JOIN `groups` AS rg ON `m`.`receiverGroupID` = `rg`.`id`";
+
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                // 
+                while (dataReader.Read())
+                {
+                    // initialisation des propriétés de la classe avec les données de la db
+                    
+                        Report rep = new Report(dataReader.GetInt32("reportID"), dataReader.GetString("reportDescription"), dataReader.GetInt32("messageID"), dataReader.GetString("messageContent"), dataReader.GetInt32("senderID"), dataReader.GetString("senderName"), dataReader.GetInt32("receiverID"), dataReader.GetString("receiverName"));
+                    reportsList.Add(rep);
+                }
+
+                //close connection
+                this.CloseConnection();
+            }
+
+            return reportsList;
         }
 
     }
